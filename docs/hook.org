@@ -1,0 +1,10 @@
+#+title: Hook
+
+* Class Overview
+An ~EffectHook~ is something that is attached to a ~Stats~ object.
+* IDEA ~attach~
+Currently, it takes one character, but thinking about it, it might need to take multiple characters - say for an AOE effect.
+* TODO ~attach~
+It should properly account for stacking effects.
+
+e.g. a burn cannot be applied multiple times but a defense down can.

@@ -1,0 +1,75 @@
+#+title: Banner
+
+#+begin_src python
+
+        self.banner = {
+            "FIVE_STAR": {
+                "character": {
+                    "total_rate": 0.01,
+                    "list": ["Abaddon", "Lucielle", "Anna"]
+                },
+                "artifact": {
+                    "total_rate": 0.04,
+                    "list": ["Hyperflex Miasma", "Aspen Trees", "Flowering Blooms"]
+                }
+            },
+            "FOUR_STAR": {
+                "character": {
+                    "total_rate": 0.10,
+                    "list": ["Spanky", "Durden", "Whippy", "Alto", "Master Chester"]
+                },
+                "artifact": {
+                    "total_rate": 0.18,
+                    "list": ["Test1", "Test2"]
+                }
+            },
+            "THREE_STAR": {
+                "character": {
+                    "total_rate": 0.32,
+                    "list": ["Joe", "Bob", "Seve", "Spanky", "Antionne", "Abdul", "Dick", "Nubby"]
+                },
+                "artifact": {
+                    "total_rate": 0.35,
+                    "list": ["Dredge", "Spinning Tops", "Spider's Web", "Plastic"]
+                }
+            },
+        }
+
+#+end_src
+
+#+begin_src python
+
+        self.banner = {
+            "FIVE_STAR": {
+                "character": {
+                    "total_rate": 0.01,
+                    "list": ["Cas", "Lucielle", "Anna"]
+                },
+                "artifact": {
+                    "total_rate": 0.04,
+                    "list": ["Hyperflex Miasma", "Aspen Trees", "Flowering Blooms"]
+                }
+            },
+            "FOUR_STAR": {
+                "character": {
+                    "total_rate": 0.10,
+                    "list": ["Spanky", "Durden", "Whippy", "Alto", "Master Chester"]
+                },
+                "artifact": {
+                    "total_rate": 0.18,
+                    "list": ["Test1", "Test2"]
+                }
+            },
+            "THREE_STAR": {
+                "character": {
+                    "total_rate": 0.32,
+                    "list": ["Joe", "Bob", "Seve", "Spanky", "Antionne", "Abdul", "Dick", "Nubby"]
+                },
+                "artifact": {
+                    "total_rate": 0.35,
+                    "list": ["Dredge", "Spinning Tops", "Spider's Web", "Plastic"]
+                }
+            },
+        }
+
+#+end_src

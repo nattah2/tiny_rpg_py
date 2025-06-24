@@ -1,0 +1,80 @@
+#+title: Temp
+
+#+begin_src python
+class InvalidProbabilityError(Exception):
+    pass
+try:
+    total_probability = sum(items.values())
+    if abs(total_probability - 1) > 1e-6:  # Float precision safe-check
+        raise InvalidProbabilityError(f"Total probability is {total_probability}, expected 1.")
+except InvalidProbabilityError as e:
+    print(f"[ERROR] {e}")
+
+def simulate_pull():
+    """Simulate a single gacha pull based on the probability distribution"""
+    choices = list(items.keys())
+    probabilities = list(items.values())
+    return random.choices(choices, weights=probabilities, k=1)[0]
+
+def simulate_ten_pull():
+    """Simulate a single gacha pull based on the probability distribution"""
+    for n in range(11):
+        print(simulate_pull())
+
+# Simulate 10,000 pulls to demonstrate the distribution
+pulls = [simulate_pull() for _ in range(10000)]
+
+# Count occurrences
+results = {}
+for item in items.keys():
+    results[item] = pulls.count(item)
+
+# Convert to percentages
+for item in results:
+    results[item] = results[item] / 100  # Convert to percentage
+
+# Pity system (not implemented in the simulation above but common in gacha games)
+def pity_system_example():
+    """
+    Example of how a pity system might work:
+    - Guaranteed 4★ or higher every 10 pulls
+    - Guaranteed 5★ at 90 pulls if none obtained before that
+    - 5★ rate increases after 75 pulls
+    """
+    pity_count = 0
+    four_star_pity = 0
+
+    while pity_count < 90:
+        pity_count += 1
+        four_star_pity += 1
+
+        # Adjusted rates based on pity
+        if pity_count >= 75:  # Soft pity for 5★
+            five_star_rate = 0.2  # Increased rate
+        else:
+            five_star_rate = 0.013  # Base 5★ rate
+
+        # Guaranteed 4★ at 10 pulls
+        if four_star_pity == 10:
+            print(f"Pull {pity_count}: Guaranteed 4★ or higher")
+            four_star_pity = 0
+            continue
+
+        # Random pull with adjusted rates
+        if random.random() < five_star_rate:
+            print(f"Pull {pity_count}: Got a 5★!")
+            pity_count = 0  # Reset pity after getting a 5★
+            four_star_pity = 0
+
+    # If we reach 90 pulls without a 5★
+    if pity_count == 90:
+        print("Pull 90: Hard pity activated - Guaranteed 5★")
+
+# Example simulation of pity system
+# pity_system_example()
+
+
+print("Hypothetical Gacha Rates:")
+for item, rate in items.items():
+    print(f"{item}: {rate*100:.2f}%")
+#+end_src

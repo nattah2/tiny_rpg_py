@@ -1,0 +1,24 @@
+#+title: Project Management
+
+* DONE Implement Elo System
+
+* DONE Implement Character Stats
+
+* TODO Implement Character
+[[./src/character.py]]
+* TODO Implement Tournament
+
+* TODO Implement Effects
+
+* TODO Implement Experience
+
+* TODO Implement Battle
+1. ~field_turn_begin~
+2. ~char_turn_begin~
+3. ~select_action~
+4. ~on_execute_action~
+5. ~execute_action~
+6. ~char_turn_end~
+7. ~char_
+* TODO Implement Account
+[[./src/account.py]]

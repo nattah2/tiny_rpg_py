@@ -1,0 +1,30 @@
+#+title: Project Management
+
+* DONE Implement Elo System
+- [[../src/elo.py]]
+** IDEA Implement Glicko
+* DONE Implement Character Stats
+- [[../src/stats.py]]
+* DONE Implement Character
+- [[../src/character.py]]
+* STRT Implement Hooks
+[[./hook.org]]
+* DONE Implement Effects
+* DONE Implement Experience
+* TODO Implement Battle
+** Introduction
+As the largest and most complex project, this is the one that requires the most thought and research. Let's start by defining two parameters; the
+1. ~field_turn_begin~
+2. ~cycle_turn_begin~
+3. ~char_turn_begin~
+4. ~select_action~
+5. ~on_execute_action~
+6. ~execute_action~
+7. ~char_turn_end~
+* TODO Implement Dialogue
+I suppose a dialogue system should just interpret Ink, if an existing solution doesn't exist.
+* DONE Implement Money System
+What's wrong with this again?
+Oh yeah, a dumbass AI wrote this code. Check it again.
+* TODO Implement
+* TODO Implement Tournament

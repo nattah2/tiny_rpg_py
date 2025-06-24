@@ -1,0 +1,24 @@
+#+title: Devlog
+
+This goes over some fundamental techniques of game developing, I think.
+
+1. In general, favor compositional design when possible. [1]
+2. In general, favor pure functions when possible. [2]
+
+
+* Pure Functions
+A pure function lacks side-effects, which means that it does not modify the /state/ of things. An example of an impure function is as follows:
+
+#+begin_src python
+def increase_rating(player, increase):
+    player.rating += increase # This is a side-effect
+
+increase_rating(my_player, 100)
+#+end_src
+
+#+begin_src python
+def increase_rating(player, increase):
+    return player.rating + increase
+
+player.rating = increase_rating(player, 100)
+#+end_src

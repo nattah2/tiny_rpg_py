@@ -1,0 +1,68 @@
+{
+    "version": 0.01,
+    "name": "Standard Banner"
+    "banner": {
+        "5_star": {
+            "character" : {
+                "total_rate": 0.006,
+                "list": [
+                "alpha",
+                "beta",
+                "gamma"
+                ]
+            },
+            "weapon" : {
+            "total_rate" : 0.008,
+            "list": [
+                "weapon a",
+                "weapon b",
+                "weapon c",
+                "weapon d",
+                "weapon e",
+            ]
+            }
+        }
+        "4_star": {
+            "character" : {
+                "total_rate": 0.006,
+                "list": [
+                "four_bob",
+                "four_alice",
+                "four_carol",
+                "four_dick",
+                "four_ezekiel"
+                ]
+            },
+            "weapon" : {
+            "total_rate" : 0.008,
+            "list": [
+                "weapon 4a",
+                "weapon 4b",
+                "weapon 4c",
+                "weapon 4d",
+                "weapon 4e",
+            ]
+            }
+        }
+        "3_star": {
+            "character" : {
+                "total_rate": 0.006,
+                "list": [
+                "alpha",
+                "beta",
+                "gamma"
+                ]
+            },
+            "weapon" : {
+            "total_rate" : 0.008,
+            "list": [
+                "weapon a",
+                "weapon b",
+                "weapon c",
+                "weapon d",
+                "weapon e",
+            ]
+            }
+        }
+    }
+}
