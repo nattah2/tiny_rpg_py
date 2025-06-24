@@ -18,6 +18,7 @@ pkgs.mkShell {
     pythonPackages.python-lsp-server
     pythonPackages.pip
     pkgs.sqlite
+    pkgs.ghc
   ];
 
   postShellHook = ''

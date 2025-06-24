@@ -16,6 +16,6 @@ class Character(BaseModel):
         level: Level = Field(default_factory=Level)
 
 
-# if __name__=="__main__":
-#         c = Character(name="Stink", stats=Stats(attack=100.0, defense=69.0), elo=Elo(), level=Level())
-#         util.pprint(c.model_dump())
+if __name__=="__main__":
+        c = Character(name="Stink", stats=Stats(attack=100.0, defense=69.0), elo=Elo(), level=Level())
+        util.pprint(c.model_dump())

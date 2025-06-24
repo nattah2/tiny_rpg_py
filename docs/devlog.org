@@ -1,24 +1,81 @@
 #+title: Devlog
 
-This goes over some fundamental techniques of game developing, I think.
+* Pre-Alpha 0.0.1
+** Introduction
+A quick note on this project since I'd rather get back to coding. This isn't particularly relevant to anything I'm seriously trying to do in my life but it's an updated recreation of a toy program I made several years ago back before college. That particular program was an Elo simulator; using the Elo formula, it simulated tournaments. Essentially, a zero-player game in lieu of Conway's Game of Life are.
 
-1. In general, favor compositional design when possible. [1]
-2. In general, favor pure functions when possible. [2]
+While that program was fun, it was relatively primitive. The way "matches" were decided was based on the .
 
+This one is a little more involved and is requiring a lot more work. And as a hobby toy program, it's ballooned in scope to fit inline with my current tastes. So, here's a brief overview of what it does /so far/ with
+** What Isn't Implemented (Yet)
+Firstly, I'm working on battles right now, which would make this at least version alpha. I decided to upload this to GitHub so that I cann
+** Accounts
+For a reason I cannot articulate, I implemented a secure account system and database. See: [[../src/account.py]] and [[../src/database.py]]. So, you can register accounts and login to said accounts. The data associated with these accounts is located in [[../data/user_data]], with each account having an assigned UUID.
 
-* Pure Functions
-A pure function lacks side-effects, which means that it does not modify the /state/ of things. An example of an impure function is as follows:
+There's currently a test database packaged in here, with a single account with username 'Admin' and password 'Password' if I recall.
+** Gacha
+I've been playing some gacha games recently, so of course I had to implement a gacha system. See: [[../src/gacha.py]]. This code needs refactoring but the necessary parameters to 1) roll from a set amount of characters and 2) save and load said inventory to your account exists. There's also a general currency system from [[../src/money.py]] that allows you to define currencies.
+** Characters
+See: [[../src/character.py]], [[../src/stats.py]], [[../src/elo.py]], [[../src/level.py]].
 
+So the stated aim of this from the original program I described above is to actually get real battle simulations instead of abstracting them away. So that's why we're implementing a ton of RPG mechanics now, my one true love.
+
+- It's been awhile since I looked at it, but the level system should work similarly to Pokemon's where there's a defined 'curve' function. But it's a generic level system (supposedly, that is the point of compositional design, right?) so it's going to be reused in things like the account system eventually.
+- I have no idea what I did for this stats class, since I've rewritten it dozens of times. It should have support for stat modifications in the midst of battles (Multiplicative mods and flat mods). This also might need to get refactored down the line. Because Pydantic is useful, everything is easily serializable.
+- Elo is another thing that is functional at the moment but still has some work to be done. I'd like to implement Glicko next, but I don't understand it well enough.
+- The character class is relatively bare-bones, since most of the functionality is stored elsewhere. In fact, the current iteration of the code is little more than a container class. A lot of this comes down to the fact that I donn't actually have a solid plan for what the gameplay /should/ look like in the first place.
 #+begin_src python
-def increase_rating(player, increase):
-    player.rating += increase # This is a side-effect
+from elo import *
+from stats import *
+from level import Level
 
-increase_rating(my_player, 100)
+class Character(BaseModel):
+        name: str
+        stats: Stats
+        elo: Elo = Field(default_factory=Elo)
+        level: Level = Field(default_factory=Level)
 #+end_src
 
-#+begin_src python
-def increase_rating(player, increase):
-    return player.rating + increase
+Everything inherits from BaseModel for simpler JSON serialization. An example is as follows.
 
-player.rating = increase_rating(player, 100)
+#+begin_src json
+{'elo': {'rating': 1000, 'rating_dev': 0},
+ 'level': {'level': 1, 'level_cap': 80},
+ 'name': 'Stink',
+ 'stats': {'attack': {'base_stat': 100.0,
+                      'flat_mod_hook': [],
+                      'mult_mod_hook': [],
+                      'name': 'ATK',
+                      'value': 100.0},
+           'crit_dmg': {'base_stat': 1.0,
+                        'flat_mod_hook': [],
+                        'mult_mod_hook': [],
+                        'name': 'CRD',
+                        'value': 1.0},
+           'crit_rate': {'base_stat': 1.0,
+                         'flat_mod_hook': [],
+                         'mult_mod_hook': [],
+                         'name': 'CRR',
+                         'value': 1.0},
+           'defense': {'base_stat': 69.0,
+                       'flat_mod_hook': [],
+                       'mult_mod_hook': [],
+                       'name': 'DEF',
+                       'value': 69.0},
+           'mana_gain': {'base_stat': 100.0,
+                         'flat_mod_hook': [],
+                         'mult_mod_hook': [],
+                         'name': 'MNG',
+                         'value': 100.0},
+           'speed': {'base_stat': 1.0,
+                     'flat_mod_hook': [],
+                     'mult_mod_hook': [],
+                     'name': 'SPE',
+                     'value': 1.0}}}
 #+end_src
+** Event Emitter System and Battle System
+This is the current thing I'm working on. This is the first time where I need to make conscious "creative" decisions in some respects. Everything else is a relatively opinions-free implementation of generic, commonly found structures in games, but this one actually demands me to actually determine what works and what doesn't.
+
+Right now, there is a "battle" system of sorts. An event emitter system in [[../src/event.py]] should allow for you to, well, emit and register events. [[../src/battle.py]] technically goes through some amount of things but it doesn't quite do anything just yet.
+** Other Things
+The random gdsrc directory is if I decide to port this to gdscript.
