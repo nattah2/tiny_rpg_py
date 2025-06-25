@@ -2,12 +2,13 @@
 
 from pydantic import BaseModel
 from typing import Optional
+from effect import Effect
 
 class Stat(BaseModel):
     name: str
     base_stat: float = 1.0
-    flat_mod_hook: list[float] = []
-    mult_mod_hook: list[float] = []
+    flat_mod_hook: list[Effect] = []
+    mult_mod_hook: list[Effect] = []
     value: float = 0.0
 
     def calc_stat(self):
@@ -79,3 +80,8 @@ class Stats(BaseModel):
                 else:
                     print(f"Unclarified stat change from {hook.name}. Ignoring.")
                 print(f"Attached {hook.name} to {stat}.")
+
+class Health(Stat):
+    current_value: float
+
+    def __init__(self, )

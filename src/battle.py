@@ -41,6 +41,7 @@ class Battle(EventEmitter):
         for n in self.pool:
             print(f"{n.name} => {n.stats.speed.value}")
 
+
     def run_turn(self):
         """Run a full battle turn cycle."""
         self.turn_counter += 1
@@ -73,8 +74,10 @@ class Battle(EventEmitter):
             self.end_battle()
 
 if __name__ == '__main__':
-    protag = Character(name="Protagonist", stats=Stats(attack=130.0, defense=69.0, speed=88.0))
-    antago = Character(name="Antagonist", stats=Stats(attack=130.0, defense=89.0, speed=65.0))
+    protag2 = Character(name="Protagonist", stats=Stats(attack=130.0, defense=69.0, speed=88.0))
+    protag1 = Character(name="Protagonist", stats=Stats(attack=130.0, defense=69.0, speed=88.0))
+    antago1 = Character(name="Antagonist", stats=Stats(attack=130.0, defense=89.0, speed=65.0))
+    antago2 = Character(name="Antagonist", stats=Stats(attack=130.0, defense=89.0, speed=65.0))
     util.pprint(protag.model_dump())
     util.pprint(antago.model_dump())
     b = Battle([protag], [antago])
