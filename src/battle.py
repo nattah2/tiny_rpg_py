@@ -5,8 +5,6 @@
 # game_events.on("enemy_death", on_enemy_death)
 # game_events.emit("enemy_death", "Goblin")  # Output: "Goblin has been defeated!"
 
-# TODO Please Read This
-
 import event
 
 from abc import ABC, abstractmethod
@@ -78,7 +76,9 @@ if __name__ == '__main__':
     protag1 = Character(name="Protagonist", stats=Stats(attack=130.0, defense=69.0, speed=88.0))
     antago1 = Character(name="Antagonist", stats=Stats(attack=130.0, defense=89.0, speed=65.0))
     antago2 = Character(name="Antagonist", stats=Stats(attack=130.0, defense=89.0, speed=65.0))
-    util.pprint(protag.model_dump())
-    util.pprint(antago.model_dump())
-    b = Battle([protag], [antago])
+    util.pprint(protag1.model_dump())
+    util.pprint(protag2.model_dump())
+    util.pprint(antago1.model_dump())
+    util.pprint(antago2.model_dump())
+    b = Battle([protag1, protag2], [antago1, antago2])
     b.start_battle()

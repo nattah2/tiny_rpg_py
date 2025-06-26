@@ -2,17 +2,15 @@
 
 from pydantic import BaseModel
 from typing import Optional
-from stats import Stat
 from event import *
 
-class Effect(BaseModel):
+class Effect():
     name             : str   = "unnamed"
     duration_counter : int   = 0
     emitter          : EventEmitter
 
     def model_post_init(self, __context):
         self._register_events()
-
 
     def _register_events(self):
         self.emitter.on(onTurnBegin, self._handle_turn_begin)
@@ -46,4 +44,3 @@ class Effect(BaseModel):
 class StatModifier(Effect):
     flat_value       : float = 0.0
     mult_value       : float = 0.0
-    hook_to          : Stat

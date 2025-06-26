@@ -1,31 +1,31 @@
 #!/usr/bin/env python3
 
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, PrivateAttr
+from typing import Optional, List
 from effect import Effect
 
 class Stat(BaseModel):
     name: str
     base_stat: float = 1.0
-    flat_mod_hook: list[Effect] = []
-    mult_mod_hook: list[Effect] = []
+    _flat_mod_hook: List[Effect] = PrivateAttr(default_factory=list)
+    _mult_mod_hook: List[Effect] = PrivateAttr(default_factory=list)
     value: float = 0.0
 
     def calc_stat(self):
         final_stat = self.base_stat
-        for hook in self.mult_mod_hook:
+        for hook in self._mult_mod_hook:
             final_stat *= hook.value
-        for hook in self.flat_mod_hook:
+        for hook in self._flat_mod_hook:
             final_stat += hook.value
         self.value = final_stat
 
     def flat_mod_hook_attach(self, hook):
-        self.flat_mod_hook.append(hook)
+        self._flat_mod_hook.append(hook)
         # hook.attach(hook)
         self.calc_stat()
 
     def mult_mod_hook_attach(self, hook):
-        self.mult_mod_hook.append(hook)
+        self._mult_mod_hook.append(hook)
         # hook.attach(hook)
         self.calc_stat()
 
@@ -83,5 +83,3 @@ class Stats(BaseModel):
 
 class Health(Stat):
     current_value: float
-
-    def __init__(self, )
