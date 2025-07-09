@@ -20,6 +20,7 @@ class Elo(BaseModel):
     #     return g
 
     # @staticmethod
+    # TODO I have no idea how GLICKO works, so whoops.
     # def glicko_expected_score(player1: Elo, player2: Elo) -> Tuple[float, float]:
     #     # Expected = 1 / (1 + 10^(-g(RD_i^2 + RD_j^2)(r_i - r_j)/400))
     #     Expected = 1 / (1 + 10^(-glicko_scaling_func(player1.rating_dev**2 + player2.rating_dev**2) * (player1.rating_dev - player2.rating_dev)/400))

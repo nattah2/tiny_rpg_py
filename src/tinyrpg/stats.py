@@ -7,24 +7,28 @@ from effect import Effect
 class Stat(BaseModel):
     name: str
     base_stat: float = 1.0
-    _flat_mod_hook: List[Effect] = PrivateAttr(default_factory=list)
-    _mult_mod_hook: List[Effect] = PrivateAttr(default_factory=list)
+    _flat_mod_hook: List[float] = PrivateAttr(default_factory=list)
+    _mult_mod_hook: List[float] = PrivateAttr(default_factory=list)
     value: float = 0.0
 
     def calc_stat(self):
         final_stat = self.base_stat
         for hook in self._mult_mod_hook:
-            final_stat *= hook.value
+            final_stat *= hook #.flat_value
         for hook in self._flat_mod_hook:
-            final_stat += hook.value
+            final_stat += hook #.mod_value
         self.value = final_stat
 
-    def flat_mod_hook_attach(self, hook):
+    def flat_mod_hook_attach(self, hook: Effect):
         self._flat_mod_hook.append(hook)
         # hook.attach(hook)
         self.calc_stat()
 
-    def mult_mod_hook_attach(self, hook):
+    def mult_mod_hook_attach(self, hook: Effect):
+        """
+        Append a multiplicative stat change to the stat.
+        It takes an Effect hook.
+        """
         self._mult_mod_hook.append(hook)
         # hook.attach(hook)
         self.calc_stat()

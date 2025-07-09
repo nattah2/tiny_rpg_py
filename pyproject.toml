@@ -1,0 +1,15 @@
+[project]
+name = "tinyrpg"  # Your package name (for distribution)
+version = "0.1.0"   # Semantic versioning (e.g., 1.0.0)
+description = "My miniature gacha prototype"
+
+[build-system]
+requires = ["setuptools>=64.0.0"]  # Ensures modern build tools
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+python_files = "test_*.py"  # Pytest config (optional)
+addopts = "-v"             # Verbose output (optional)
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]     # Dev dependencies (install with `pip install -e .[test]`)

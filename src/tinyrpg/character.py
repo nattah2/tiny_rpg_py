@@ -14,7 +14,7 @@ class Character(BaseModel):
         stats: Stats
         elo: Elo = Field(default_factory=Elo)
         level: Level = Field(default_factory=Level)
-
+        action_value: int = 10000
 
 if __name__=="__main__":
         c = Character(name="Stink", stats=Stats(attack=100.0, defense=69.0), elo=Elo(), level=Level())

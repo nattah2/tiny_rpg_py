@@ -42,5 +42,8 @@ class Effect():
 
 
 class StatModifier(Effect):
-    flat_value       : float = 0.0
-    mult_value       : float = 0.0
+    def __init__(self, flat_value: 0.0, mult_value: 0.0):
+        # flat_value       : float = 0.0
+        # mult_value       : float = 0.0
+        self.flat_value = flat_value
+        self.mult_value = mult_value
