@@ -1,21 +1,31 @@
 #!/usr/bin/env python3
 
 from colorama import init
+from tinyrpg.event import onApply
 from termcolor import colored
-from pydantic import BaseModel
-import util
+from tinyrpg import util
+from pydantic import BaseModel, Field
 
-from elo import *
-from stats import *
-from level import Level
+from tinyrpg.elo import Elo
+from tinyrpg.stats import Stats
+from tinyrpg.level import Level
+from tinyrpg.event import onApply
+from tinyrpg.effect import Effect
 
 class Character(BaseModel):
         name: str
         stats: Stats
         elo: Elo = Field(default_factory=Elo)
         level: Level = Field(default_factory=Level)
-        action_value: int = 10000
 
-if __name__=="__main__":
-        c = Character(name="Stink", stats=Stats(attack=100.0, defense=69.0), elo=Elo(), level=Level())
-        util.pprint(c.model_dump())
+        # TODO Consider passingn the emitter in as a parameter,
+        #      instead of keeping it in the effect.
+        def apply_effect(self, effect: Effect):
+                print(f"We're applying the effect: {effect.name}")
+                for n in effect.components:
+                        print(f"- We're applying this effect to: {n.target}")
+                effect.emitter.emit(
+                        onApply(
+                                cycle_counter = 0,
+                        )
+                )

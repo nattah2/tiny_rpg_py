@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 
-import util
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import Tuple, ClassVar
 
 class Elo(BaseModel):
+    """
+    A class for representing a player's Elo rating.
+    Elo is a rating system
+
+      rating     = The current rating of the player.
+      rating_dev = Currently unimplemented.
+    """
     rating        :   int = 1000
     rating_dev    : float = 0
     k     : ClassVar[int] = 32 # This is a static variable.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 class EffectHook():
-    def __init__(self, name, value, flags=None):
+    def __init__(self, name, value, flags:dict=None):
         self.name     = name
         self.value    = value
         self.lifetime = -1

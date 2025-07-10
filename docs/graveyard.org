@@ -1,0 +1,55 @@
+#+title: Graveyard
+
+* Effect.py
+#+begin_src python
+# name             : str   = "unnamed"
+# duration_counter : int   = 0
+# emitter          : EventEmitter
+
+# def model_post_init(self, __context):
+#     self._register_events()
+# class StatModifier(Effect):
+#     def __init__(self,
+#                  emitter: EventEmitter,
+#                  target: Any,
+#                  name: str = "unnamed",
+#                  duration_counter: int = -1,
+#                  flat_value: float = 0.0,
+#                  mult_value:float  = 1.0
+#                  ):
+#         super().__init__(emitter, target, name, duration_counter)
+#         self.flat_value = flat_value
+#         self.mult_value = mult_value
+
+#     def onApply(self, event: onApply):
+#         print(f"\n==={self.name}===")
+#         print(f"\nWe're targeting: {self.target.name}")
+#         print(f"It has the value: {self.target.value}")
+#         print(f"We're on turn cycle: {event.cycle_counter}")
+
+
+        # for event_cls in Effect.EVENTS:
+        #     method_name = event_cls.__name__  # e.g., "onTurnBegin"
+        #     for component in self.components:
+        #         handler = getattr(component, method_name, None)
+        #         if callable(handler):
+        #             self.emitter.on(event_cls, handler)
+        # self.emitter.on(onTurnBegin, )
+
+
+        # self.emitter.off(onTurnBegin, self.onTurnBegin)
+        # self.emitter.off(onTurnEnd, self.onTurnEnd)
+        # self.emitter.off(onAttackDeclaration, self.onAttackDeclaration)
+        # self.emitter.off(onDamage, self.onDamage)
+        # self.emitter.off(onCycleEnd, self.onCycleEnd)
+        # self.emitter.off(onApply, self.onApply)
+
+    # EVENTS = [
+    #     onTurnBegin,
+    #     onTurnEnd,
+    #     onAttackDeclaration,
+    #     onCycleEnd,
+    #     onApply
+    # ]
+
+#+end_src

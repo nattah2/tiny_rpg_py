@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 from dataclasses import dataclass
-from typing import Callable, Type, TypeVar, Generic, Dict, List
+from typing import Callable, Type, TypeVar, Dict, List, Any, Optional
+# from tinyrpg import effect
 
 # Base event class
 class Event:
@@ -53,9 +54,6 @@ class EventEmitter:
 class onTurnBegin(Event):
     cycle_counter: int
 
-@dataclass
-class onTurnEnd(Event):
-    cycle_counter: int
 
 @dataclass
 class onTurnEnd(Event):
@@ -75,4 +73,8 @@ class onBegin(Event):
 
 @dataclass
 class onCycleEnd(Event):
+    cycle_counter: int
+
+@dataclass
+class onApply(Event):
     cycle_counter: int

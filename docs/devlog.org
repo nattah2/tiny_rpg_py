@@ -79,3 +79,13 @@ This is the current thing I'm working on. This is the first time where I need to
 Right now, there is a "battle" system of sorts. An event emitter system in [[../src/event.py]] should allow for you to, well, emit and register events. [[../src/battle.py]] technically goes through some amount of things but it doesn't quite do anything just yet.
 ** Other Things
 The random gdsrc directory is if I decide to port this to gdscript.
+* Pre-Alpha 0.0.2
+I worked on the battle system.
+
+Currently, the way turns are ordered are based on Honkai: Star Rail, and by 'based on', I mean wholesale ripping off. The way Speed works in this game has gotten a bit of flak, but I like it.
+
+So, faster characters will take more turns over time, making Speed an even .
+
+#+begin_src
+
+#+end_src

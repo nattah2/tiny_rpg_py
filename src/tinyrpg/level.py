@@ -11,17 +11,25 @@ CURVE_FUNCTIONS = {
 }
 
 class Level(BaseModel):
+    """
+    A level object.
+
+        level:              The actual level of the object.
+        _curve_type_name:   Defines the amount of experience needed for each level.
+                            Options: "Fast", "Medium"
+        level_cap:          The level at which no more experience can be gained.
+    """
     level: int = 1
-    _curve_type_name: CurveType = "Medium"
+    curve_type_name: CurveType = "Medium"
     level_cap: int = 80
     _exp_to_nextlevel: int = 0
     _exp: int = 0
 
     def model_post_init(self, __context: any) -> None:
-        self._exp_to_nextlevel = CURVE_FUNCTIONS[self._curve_type_name](self.level)
+        self._exp_to_nextlevel = CURVE_FUNCTIONS[self.curve_type_name](self.level)
 
     def gain_experience(self, experience: int):
-        current_curve_function = CURVE_FUNCTIONS[self._curve_type_name]
+        current_curve_function = CURVE_FUNCTIONS[self.curve_type_name]
 
         while self.level_cap >= self.level and experience > 0:
             remaining_xp_forlevel = self._exp_to_nextlevel - self._exp
@@ -59,7 +67,7 @@ class Level(BaseModel):
 
 if __name__=="__main__":
     try:
-        player_fast = Level(level=1, _curve_type_name="Fast", level_cap=10) # Using field names directly
+        player_fast = Level(level=1, curve_type_name="Fast", level_cap=10) # Using field names directly
         print(f"Player Fast Curve (Initial): {player_fast}")
         player_fast.gain_experience(5) # Enough for Level 2
         print(f"Player Fast Curve (After XP): {player_fast}")
@@ -69,7 +77,7 @@ if __name__=="__main__":
         print(f"Player Fast Curve (After much more XP): {player_fast}")
 
 
-        player_medium = Level(level=1, _curve_type_name="Medium", level_cap=10)
+        player_medium = Level(level=1, curve_type_name="Medium", level_cap=10)
         print(f"\nPlayer Medium Curve (Initial): {player_medium}")
         player_medium.gain_experience(5)
         print(f"Player Medium Curve (After XP): {player_medium}")
@@ -80,7 +88,7 @@ if __name__=="__main__":
 
         # Invalid curve type
         print("\nAttempting invalid curve type:")
-        player_invalid = Level(_curve_type_name="InvalidCurve") # This will raise ValidationError
+        player_invalid = Level(curve_type_name="InvalidCurve") # This will raise ValidationError
 
     except ValidationError as e:
         print(f"Validation Error: {e}")
